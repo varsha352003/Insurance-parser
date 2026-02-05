@@ -1,7 +1,14 @@
 import json
 import re
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, Optional, List
+
+try:
+    import pdfplumber
+    PDF_SUPPORT = True
+except ImportError:
+    PDF_SUPPORT = False
 
 
 FINANCIAL_FIELDS = [
@@ -20,6 +27,29 @@ FINANCIAL_FIELDS = [
 CURRENCY_SYMBOLS = r'(?:USD|INR|\$|Rs\.?)?'
 NUMERIC_PATTERN = r'([\d,]+(?:\.\d{2})?)'
 DATE_PATTERN = r'(\d{2}[/-]\d{2}[/-]\d{4})'
+
+
+def extract_text_from_file(file_path: str) -> str:
+    file_extension = Path(file_path).suffix.lower()
+    
+    if file_extension == '.pdf':
+        if not PDF_SUPPORT:
+            raise ImportError("pdfplumber not installed. Install with: pip install pdfplumber")
+        
+        text_content = []
+        with pdfplumber.open(file_path) as pdf:
+            for page in pdf.pages:
+                page_text = page.extract_text()
+                if page_text:
+                    text_content.append(page_text)
+        return '\n'.join(text_content)
+    
+    elif file_extension == '.txt':
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+    
+    else:
+        raise ValueError(f"Unsupported file type: {file_extension}. Use .txt or .pdf")
 
 
 class InsuranceParser:
@@ -55,16 +85,18 @@ class InsuranceParser:
 
     def read_document(self) -> str:
         try:
-            with open(self.file_path, 'r', encoding='utf-8') as file:
-                self.raw_text = file.read()
-                self.normalized_text = self.normalize_text(self.raw_text)
-                return self.raw_text
+            self.raw_text = extract_text_from_file(self.file_path)
         except FileNotFoundError:
             raise FileNotFoundError(f"Document not found: {self.file_path}")
         except PermissionError:
             raise PermissionError(f"Permission denied: {self.file_path}")
+        except ImportError as e:
+            raise ImportError(str(e))
         except Exception as e:
             raise Exception(f"Error reading document: {str(e)}")
+        
+        self.normalized_text = self.normalize_text(self.raw_text)
+        return self.raw_text
 
     def extract_policy_number(self) -> Optional[str]:
         try:

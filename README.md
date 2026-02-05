@@ -1,10 +1,10 @@
 # Insurance Document Parser
 
-A Python tool for extracting structured data from insurance policy documents using regular expressions.
+A Python tool for extracting structured data from insurance policy documents (TXT and PDF) using regular expressions.
 
 ## Overview
 
-Automates extraction of policy information and financial data from unstructured insurance documents into structured JSON format.
+Automates extraction of policy information and financial data from unstructured insurance documents into structured JSON format. Supports both text and PDF files.
 
 ## Fields Extracted
 
@@ -26,7 +26,13 @@ Uses rule-based regex patterns to match and extract field values. Multiple patte
 
 ## Installation
 
-Requires Python 3.7+. No external dependencies.
+Requires Python 3.7+. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the parser:
 
 ```bash
 python parser.py
@@ -49,10 +55,11 @@ Generates JSON file with extracted fields. Missing fields return null.
 - Only extracts predefined fields
 - English language only
 - Date format: MM/DD/YYYY or DD-MM-YYYY
+- Supports .txt and .pdf files only
 
 ## Future Improvements
 
-- PDF and DOCX support
+- DOCX support
 - Table extraction
 - Multi-language support
 - Batch processing
