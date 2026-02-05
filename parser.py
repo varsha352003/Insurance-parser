@@ -338,7 +338,7 @@ class InsuranceParser:
 
 
 def main():
-    input_file = 'sample_insurance_policy.txt'
+    input_file = 'sample_insurance_policy.pdf'
     output_file = 'sample_output.json'
     
     try:

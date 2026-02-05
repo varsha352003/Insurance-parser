@@ -6,19 +6,16 @@
     "expiration_date": "01/15/2025",
     "coverage_amount": "450000",
     "premium": "1850.00",
-    "total_premium": null,
-    "taxes": null,
+    "total_premium": "2183.00",
+    "taxes": "333.00",
     "fees": null,
-    "deductible": "1000",
-    "payment_frequency": null,
+    "deductible": null,
+    "payment_frequency": "annual",
     "copay": null,
     "coverage_details": [
         "Dwelling coverage up to policy limit",
         "Personal property protection",
-        "Liability coverage for bodily injury and property damage",
-        "Additional living expenses if home becomes uninhabitable",
-        "Medical payments to others",
-        "Loss of use coverage"
+        "Liability coverage"
     ],
-    "parsed_at": "2026-02-05T10:30:00.000000"
+    "parsed_at": "2026-02-05T17:00:54.598435"
 }
