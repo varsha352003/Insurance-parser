@@ -1,0 +1,24 @@
+{
+    "policy_number": "HOM-2024-789456",
+    "policyholder": "Sarah Johnson",
+    "policy_type": "Homeowners Insurance",
+    "effective_date": "01/15/2024",
+    "expiration_date": "01/15/2025",
+    "coverage_amount": "450000",
+    "premium": "1850.00",
+    "total_premium": null,
+    "taxes": null,
+    "fees": null,
+    "deductible": "1000",
+    "payment_frequency": null,
+    "copay": null,
+    "coverage_details": [
+        "Dwelling coverage up to policy limit",
+        "Personal property protection",
+        "Liability coverage for bodily injury and property damage",
+        "Additional living expenses if home becomes uninhabitable",
+        "Medical payments to others",
+        "Loss of use coverage"
+    ],
+    "parsed_at": "2026-02-05T10:30:00.000000"
+}
